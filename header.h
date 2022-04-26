@@ -97,8 +97,42 @@ public:
 				}
 			}
 			else{
-				if(this->a[i][j+1] == this->a[i][j])
-				{
+				if(this->a[i][j+1] == this->a[i][j]){
+					this->flagduplicates = true;
+				}
+			}
+		}
+	}
+
+	void swapTop(int j)/*truyen vao so cot*/{
+		for(int i = 3; i >= 1; i--){
+			if(this->a[i-1][j] == 0){
+				if(this->a[i][j] != 0){
+					this->a[i-1][j] = this->a[i-1][j] + this->a[i][j];
+					this->a[i][j] = 0;
+					this->flag = true;
+				}
+			}
+			else{
+				if(this->a[i][j] == this->a[i-1][j]){
+					this->flagduplicates = true;
+				}
+			}
+		}
+
+	}
+
+	void swapBot(int j){
+		for(int i = 0; i <= 2; i++){
+			if(this->a[i+1][j] == 0){
+				if(this->a[i][j] != 0){
+					this->a[i+1][j] = this->a[i+1][j] + this->a[i][j];
+					this->a[i][j] = 0;
+					this->flag = true;
+				}
+			}
+			else{
+				if(this->a[i][j+1] == this->a[i][j]){
 					this->flagduplicates = true;
 				}
 			}
@@ -138,52 +172,50 @@ public:
 					if(this->a[i][j] != 0 && this->a[i][j] == this->a[i][j-1]){
 						this->a[i][j] = this->a[i][j] + this->a[i][j-1];
 						this->a[i][j-1] = 0;
-						swapLeft(i);
+						swapRight(i);
 						this->flag = true;
 					}
-					j++;
+					j--;
 				}
 			}
 		}
 
 		else if(input == "w" || input == "W"){
-			for(int i = 3; i >= 1; i--){
-				for(int j = 3; j >= 0; j--){
-					if(this->a[i-1][j] == 0){
-						if(this->a[i][j] != 0){
-							this->a[i-1][j] = this->a[i-1][j] + this->a[i][j];
-							this->a[i][j] = 0;
-							this->flag = true;
-						}
+			for(int j = 0; j < 4; j++){
+				swapTop(j);
+				if(this->flagduplicates == true){
+					swapTop(j);
+					this->flagduplicates = false;
+				}
+				int i = 0;
+				while(i < 4){
+					if(this->a[i][j] != 0 && this->a[i][j] == this->a[i+1][j]){
+						this->a[i][j] = this->a[i][j] + this->a[i+1][j];
+						this->a[i+1][j] = 0;
+						swapTop(i);
+						this->flag = true;
 					}
-					else{
-						if(this->a[i-1][j] == this->a[i][j]){
-							this->a[i-1][j] = this->a[i-1][j] + this->a[i][j];
-							this->a[i][j] = 0;
-							this->flag = true;
-						}
-					}
+					i++;
 				}
 			}
 		}
 
 		else if(input == "s" || input == "S"){
-			for(int i = 0; i <= 2; i++){
-				for(int j = 0; j < 4; j++){
-					if(this->a[i+1][j] == 0){
-						if(this->a[i][j] != 0){
-							this->a[i+1][j] = this->a[i+1][j] + this->a[i][j];
-							this->a[i][j] = 0;
-							this->flag = true;
-						}
+			for(int j = 0; j < 4; j++){
+				swapBot(j);
+				if(this->flagduplicates == true){
+					swapBot(j);
+					this->flagduplicates = false;
+				}
+				int i= 3;
+				while(i >= 1){
+					if(this->a[i][j] != 0 && this->a[i][j] == this->a[i-1][j]){
+						this->a[i][j] = this->a[i][j] + this->a[i-1][j];
+						this->a[i-1][j] = 0;
+						swapBot(j);
+						this->flag = true;
 					}
-					else{
-						if(this->a[i+1][j] == this->a[i][j]){
-							this->a[i+1][j] = this->a[i+1][j] + this->a[i][j];
-							this->a[i][j] = 0;
-							this->flag = true;
-						}
-					}
+					i--;
 				}
 			}
 		}
