@@ -14,5 +14,8 @@ public:
 	Tile(void);
 	~Tile(void);
 	int randomLocation();
-	
+	void setNumber(int input);
+	int getNumber();
+private:
+	int number;
 };

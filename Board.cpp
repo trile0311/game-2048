@@ -19,14 +19,14 @@ void Board::setArray()
 	{
 		for(int j = 0; j < 4; j++)
 		{
-			ArrayBoard[i][j] = 0;
+			arrayBoard[i][j].setNumber(0);
 		}
 	}
 }
 
 void Board::setArrayByPosition(int i, int j)
 {
-	this->ArrayBoard[i][j] = 2;
+	this->arrayBoard[i][j].setNumber(2);
 }
 
 /*function to move numbers to the top*/
@@ -34,18 +34,18 @@ void Board::swapTop(int j)/*input is the number of columns*/
 {
 	for(int i = 3; i >= 1; i--)
 	{
-		if(this->ArrayBoard[i-1][j] == 0)
+		if(this->arrayBoard[i-1][j].getNumber() == 0)
 		{
-			if(this->ArrayBoard[i][j] != 0)
+			if(this->arrayBoard[i][j].getNumber() != 0)
 			{
-				this->ArrayBoard[i-1][j] = this->ArrayBoard[i-1][j] + this->ArrayBoard[i][j];
-				this->ArrayBoard[i][j] = 0;
+				this->arrayBoard[i-1][j].setNumber(this->arrayBoard[i-1][j].getNumber() + this->arrayBoard[i][j].getNumber());
+				this->arrayBoard[i][j].setNumber(0);
 				this->flagMove = true;
 			}
 		}
 		else
 		{
-			if(this->ArrayBoard[i][j] == this->ArrayBoard[i-1][j])
+			if(this->arrayBoard[i][j].getNumber() == this->arrayBoard[i-1][j].getNumber())
 			{
 				this->flagDuplicates = true;
 			}
@@ -58,18 +58,18 @@ void Board::swapLeft(int i)/*input is the number of line*/
 {
 	for(int j = 3; j >= 1; j--)
 	{
-		if(this->ArrayBoard[i][j-1] == 0)
+		if(this->arrayBoard[i][j-1].getNumber() == 0)
 		{
-			if(this->ArrayBoard[i][j] != 0)
+			if(this->arrayBoard[i][j].getNumber() != 0)
 			{
-				this->ArrayBoard[i][j-1] = this->ArrayBoard[i][j-1] + this->ArrayBoard[i][j];
-				this->ArrayBoard[i][j] = 0;
+				this->arrayBoard[i][j-1].setNumber(this->arrayBoard[i][j-1].getNumber() + this->arrayBoard[i][j].getNumber());
+				this->arrayBoard[i][j].setNumber(0);
 				this->flagMove = true;
 			}
 		}
 		else
 		{
-			if(this->ArrayBoard[i][j-1] == this->ArrayBoard[i][j])
+			if(this->arrayBoard[i][j-1].getNumber() == this->arrayBoard[i][j].getNumber())
 			{
 				this->flagDuplicates = true;
 			}
@@ -82,18 +82,18 @@ void Board::swapRight(int i)/*input is the number of line*/
 {
 	for(int j = 0; j <= 2; j++)
 	{
-		if(this->ArrayBoard[i][j+1] == 0)
+		if(this->arrayBoard[i][j+1].getNumber() == 0)
 		{
-			if(this->ArrayBoard[i][j] != 0)
+			if(this->arrayBoard[i][j].getNumber() != 0)
 			{
-				this->ArrayBoard[i][j+1] = this->ArrayBoard[i][j+1] + this->ArrayBoard[i][j];
-				this->ArrayBoard[i][j] = 0;
+				this->arrayBoard[i][j+1].setNumber(this->arrayBoard[i][j+1].getNumber() + this->arrayBoard[i][j].getNumber());
+				this->arrayBoard[i][j].setNumber(0);
 				this->flagMove = true;
 			}
 		}
 		else
 		{
-			if(this->ArrayBoard[i][j+1] == this->ArrayBoard[i][j])
+			if(this->arrayBoard[i][j+1].getNumber() == this->arrayBoard[i][j].getNumber())
 			{
 				this->flagDuplicates = true;
 			}
@@ -106,18 +106,18 @@ void Board::swapBot(int j)/*input is the number of columns*/
 {
 	for(int i = 0; i <= 2; i++)
 	{
-		if(this->ArrayBoard[i+1][j] == 0)
+		if(this->arrayBoard[i+1][j].getNumber() == 0)
 		{
-			if(this->ArrayBoard[i][j] != 0)
+			if(this->arrayBoard[i][j].getNumber() != 0)
 			{
-				this->ArrayBoard[i+1][j] = this->ArrayBoard[i+1][j] + this->ArrayBoard[i][j];
-				this->ArrayBoard[i][j] = 0;
+				this->arrayBoard[i+1][j].setNumber(this->arrayBoard[i+1][j].getNumber() + this->arrayBoard[i][j].getNumber());
+				this->arrayBoard[i][j].setNumber(0);
 				this->flagMove = true;
 			}
 		}
 		else
 		{
-			if(this->ArrayBoard[i+1][j] == this->ArrayBoard[i][j])
+			if(this->arrayBoard[i+1][j].getNumber() == this->arrayBoard[i][j].getNumber())
 			{
 				this->flagDuplicates = true;
 			}
@@ -141,10 +141,10 @@ void Board::move(string input)
 			int j = 0;
 			while(j < 4)
 			{
-				if(this->ArrayBoard[i][j] != 0 && this->ArrayBoard[i][j] == this->ArrayBoard[i][j+1])
+				if(this->arrayBoard[i][j].getNumber() != 0 && this->arrayBoard[i][j].getNumber() == this->arrayBoard[i][j+1].getNumber())
 				{
-					this->ArrayBoard[i][j] = this->ArrayBoard[i][j] + this->ArrayBoard[i][j+1];
-					this->ArrayBoard[i][j+1] = 0;
+					this->arrayBoard[i][j].setNumber(this->arrayBoard[i][j].getNumber() + this->arrayBoard[i][j+1].getNumber());
+					this->arrayBoard[i][j+1].setNumber(0);
 					swapLeft(i);
 					this->flagMove = true;
 				}
@@ -162,9 +162,9 @@ void Board::move(string input)
 			}
 			int j = 3;
 			while(j >= 1){
-				if(this->ArrayBoard[i][j] != 0 && this->ArrayBoard[i][j] == this->ArrayBoard[i][j-1]){
-					this->ArrayBoard[i][j] = this->ArrayBoard[i][j] + this->ArrayBoard[i][j-1];
-					this->ArrayBoard[i][j-1] = 0;
+				if(this->arrayBoard[i][j].getNumber() != 0 && this->arrayBoard[i][j].getNumber() == this->arrayBoard[i][j-1].getNumber()){
+					this->arrayBoard[i][j].setNumber(this->arrayBoard[i][j].getNumber() + this->arrayBoard[i][j-1].getNumber());
+					this->arrayBoard[i][j-1].setNumber(0);
 					swapRight(i);
 					this->flagMove = true;
 				}
@@ -182,9 +182,9 @@ void Board::move(string input)
 			}
 			int i = 0;
 			while(i < 4){
-				if(this->ArrayBoard[i][j] != 0 && this->ArrayBoard[i][j] == this->ArrayBoard[i+1][j]){
-					this->ArrayBoard[i][j] = this->ArrayBoard[i][j] + this->ArrayBoard[i+1][j];
-					this->ArrayBoard[i+1][j] = 0;
+				if(this->arrayBoard[i][j].getNumber() != 0 && this->arrayBoard[i][j].getNumber() == this->arrayBoard[i+1][j].getNumber()){
+					this->arrayBoard[i][j].setNumber(this->arrayBoard[i][j].getNumber() + this->arrayBoard[i+1][j].getNumber());
+					this->arrayBoard[i+1][j].setNumber(0);
 					swapTop(i);
 					this->flagMove = true;
 				}
@@ -202,9 +202,9 @@ void Board::move(string input)
 			}
 			int i= 3;
 			while(i >= 1){
-				if(this->ArrayBoard[i][j] != 0 && this->ArrayBoard[i][j] == this->ArrayBoard[i-1][j]){
-					this->ArrayBoard[i][j] = this->ArrayBoard[i][j] + this->ArrayBoard[i-1][j];
-					this->ArrayBoard[i-1][j] = 0;
+				if(this->arrayBoard[i][j].getNumber() != 0 && this->arrayBoard[i][j].getNumber() == this->arrayBoard[i-1][j].getNumber()){
+					this->arrayBoard[i][j].setNumber(this->arrayBoard[i][j].getNumber() + this->arrayBoard[i-1][j].getNumber());
+					this->arrayBoard[i-1][j].setNumber(0);
 					swapBot(j);
 					this->flagMove = true;
 				}
@@ -234,7 +234,7 @@ void Board::show()
 		{
 			line = this->tile.randomLocation();
 			columns = this->tile.randomLocation();
-			while(this->ArrayBoard[line][columns] != 0)
+			while(this->arrayBoard[line][columns].getNumber() != 0)
 			{
 				line = this->tile.randomLocation();
 				columns = this->tile.randomLocation();
@@ -253,7 +253,7 @@ void Board::show()
 		system("cls");
 		for(int i = 0; i < 4; i++){
 			for(int j = 0; j < 4; j++){
-				cout << this->ArrayBoard[i][j];
+				cout << this->arrayBoard[i][j];
 				cout << " ";
 			}
 			cout << endl;
@@ -266,7 +266,7 @@ void Board::show()
 		{
 			line = this->tile.randomLocation();
 			columns = this->tile.randomLocation();
-			while (this->ArrayBoard[line][columns] != 0)
+			while (this->arrayBoard[line][columns].getNumber() != 0)
 			{
 				line = this->tile.randomLocation();
 				columns = this->tile.randomLocation();

@@ -20,8 +20,7 @@ public:
 	void show();
 
 private:
-	int ArrayBoard[4][4];
+	Tile arrayBoard[4][4];
 	bool flagDuplicates;
 	bool flagMove;
-	Tile tile;
 };

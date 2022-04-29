@@ -132,7 +132,7 @@ public:
 				}
 			}
 			else{
-				if(this->a[i][j+1] == this->a[i][j]){
+				if(this->a[i+1][j] == this->a[i][j]){
 					this->flagduplicates = true;
 				}
 			}

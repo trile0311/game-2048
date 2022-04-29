@@ -15,3 +15,13 @@ int Tile::randomLocation()
 	int n = rand()% (4);
 	return n;
 }
+
+void Tile::setNumber(int input)
+{
+	this->number = input;
+}
+
+int Tile::getNumber()
+{
+	return this->number;
+}
