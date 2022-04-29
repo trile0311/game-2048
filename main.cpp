@@ -1,8 +1,9 @@
 #include "stdafx.h"
 #include "header.h"
+#include "Board.h"
 
 void main(){
-	string s;
+	/*string s;
 	game g;
 	int dem = 0;
 	int x1;//vi tri khi di chuyen
@@ -22,15 +23,16 @@ void main(){
 			break;
 
 	} while (true);
-	for(int i = 0; i < 4; i++){
-		for(int j = 0; j < 4; j++){
-			cout << g.getArray(i,j);
-			cout << " ";
-		}
-		cout << endl;
-	}
 	do 
 	{
+		system("cls");
+		for(int i = 0; i < 4; i++){
+			for(int j = 0; j < 4; j++){
+				cout << g.getArray(i,j);
+				cout << " ";
+			}
+			cout << endl;
+		}
 		cout << "Nhap nut di chuyen (nhap exit de thoat): ";
 		cin >> s;
 		g.move(s);
@@ -46,18 +48,11 @@ void main(){
 			g.setFlag();
 		}
 		
-		for(int i = 0; i < 4; i++){
-			for(int j = 0; j < 4; j++){
-				cout << g.getArray(i,j);
-				cout << " ";
-			}
-			cout << endl;
-		}
 		if(s == "exit")
 			break;
 		
 	} while (true);
-	
-
-	system("pause");
+*/
+	Board b;
+	b.show();
 }
